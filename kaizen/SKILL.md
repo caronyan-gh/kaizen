@@ -16,6 +16,15 @@ Activate this skill when the user says:
 
 Review the current work or environment for practical improvements.
 
+## Scope
+
+Keep the run small.
+
+- Look only at friction from work you actually did recently. Do not turn kaizen into an audit of the whole project.
+- Stop investigating once you have enough to rank an item. Root causes, fixes, and finding an owner belong to the
+  approved work, not to the review.
+- When the user picks items, do only those and record them. Do not run the whole kaizen again.
+
 ## Instructions
 
 When this skill is activated, perform the following steps:
@@ -32,10 +41,10 @@ When this skill is activated, perform the following steps:
    Use them in steps 1–5: skip what was already done, and do not re-propose a declined item unless the situation has
    changed; say what changed if you do.
 
-   Review every item still `open`, `approved`, or `delegated` from earlier runs in this run: mark it `done` or
-   `declined`, or keep it with a new rank (`kaizen_set` with `rank`). Do not carry an item over without reviewing it.
-   Declined items older than 30 days no longer come back from `kaizen_recall`; they may be proposed again if the
-   situation has changed.
+   Items still `open`, `approved`, or `delegated` from earlier runs: decide from their records plus any new evidence
+   from this run (mark them `done` or `declined`, or re-rank them with `kaizen_set` and `rank`). If there is no new
+   evidence, keep them as they are and say "no change seen"; do not investigate them again. Declined items older than
+   30 days no longer come back from `kaizen_recall`; they may be proposed again if the situation has changed.
 
 1. Review your own recent work and identify concrete friction you encountered.
 
