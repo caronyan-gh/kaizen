@@ -81,6 +81,7 @@ When this skill is activated, perform the following steps:
    - What did you re-read from text files to check the current state?
    - Do you have improvement ideas for sqlite-named-query itself? (changes or additions to `nq.py`, how SKILL.md is
      written)
+   - Was any query noticeably slow? (how many seconds; an index or a rewrite of the query may help)
    - Is the database available and up to date (`nq.py status`: no pending migrations)?
 
    Ideas for sqlite-named-query itself: it is a shared skill used by other projects, so do not change it on the spot;
