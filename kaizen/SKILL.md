@@ -69,14 +69,27 @@ When this skill is activated, perform the following steps:
 
 2. Identify and organize any current problems, difficulties, inconveniences, or blockers not already captured in step 1.
 
-3. If the `sqlite-named-query` skill is installed, check the database side of the current work:
+3. If the `sqlite-named-query` skill is installed, look back at how your recent work used the database, or could have
+   used it. Ask yourself:
 
-   - The project already uses it: check that the database is available and up to date (`nq.py status`: it exists and
-     no migrations are pending), and that the queries the current work needs exist (`nq.py list`).
+   - Is a table missing? (something you wanted to record but had no place for)
+   - Is an existing table missing a column?
+   - Is there a table you want to change? (split, merge, fix a constraint or a name)
+   - What did you count, compare, or piece together by hand more than once?
+   - What did you search for with `nq.py list <word>` and not find?
+   - Did you write your own SQL, or read files, for something an existing query already answers?
+   - What did you re-read from text files to check the current state?
+   - Do you have improvement ideas for sqlite-named-query itself? (changes or additions to `nq.py`, how SKILL.md is
+     written)
+   - Is the database available and up to date (`nq.py status`: no pending migrations)?
 
-   - The project does not use it yet: say whether keeping some of the current work's state in a database would help.
+   Ideas for sqlite-named-query itself: it is a shared skill used by other projects, so do not change it on the spot;
+   report them to the user as proposals.
 
-   - If the skill is not installed, skip this step and write `3.` with "not applicable" in the user's language.
+   If the project does not use sqlite-named-query yet: did you re-read or reconstruct state that a database would have
+   kept?
+
+   If the skill is not installed, skip this step and write `3.` with "not applicable" in the user's language.
 
 4. Identify and organize any repetitive, routine, or standardized tasks that could reasonably be automated with scripts.
 
