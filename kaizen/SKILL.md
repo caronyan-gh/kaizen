@@ -76,12 +76,13 @@ When this skill is activated, perform the following steps:
    - Is an existing table missing a column?
    - Is there a table you want to change? (split, merge, fix a constraint or a name)
    - What did you count, compare, or piece together by hand more than once?
-   - What did you search for with `nq.py list <word>` and not find?
+   - What did you search for with `nq.py list <word>` and not find? (`nq.py stats` lists searches that found nothing)
    - Did you write your own SQL, or read files, for something an existing query already answers?
    - What did you re-read from text files to check the current state?
    - Do you have improvement ideas for sqlite-named-query itself? (changes or additions to `nq.py`, how SKILL.md is
      written)
-   - Was any query noticeably slow? (how many seconds; an index or a rewrite of the query may help)
+   - Was any query noticeably slow? (check `nq.py stats` rather than memory; an index or a rewrite of the query may
+     help)
    - Is the database available and up to date (`nq.py status`: no pending migrations)?
 
    Ideas for sqlite-named-query itself: it is a shared skill used by other projects, so do not change it on the spot;
