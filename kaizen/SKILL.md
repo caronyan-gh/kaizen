@@ -60,6 +60,10 @@ When this skill is activated, perform the following steps:
    - What repetitive work did you perform manually?
    - What check, script, helper, document, or project rule would have made your work easier?
    - Did you encounter the same friction more than once?
+   - Did the user or another agent point out or correct something in your work? (some of your own mistakes are
+     invisible to you)
+   - Did you promise to "be careful" or "make sure" to do something? Could a script or a query enforce it instead?
+     (for example, fold a status check and setting a flag into the query that reads the task)
 
    Prefer concrete examples from work you actually performed over general opinions.
 
