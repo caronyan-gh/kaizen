@@ -1,16 +1,19 @@
 ---
 name: kaizen
-description: Review the current work or environment for practical improvements — friction encountered in your own recent work, current problems and blockers, whether the needed database is available, and routine tasks worth scripting — rank each item A/B/C/Z, report them as numbered tables, and record what was approved, done, or declined so later runs do not re-propose it. Use when the user says "kaizen" or "改善".
+description: Review the current work or environment for practical improvements — friction encountered in your own recent work, current problems and blockers, whether the needed database is available, and routine tasks worth scripting — rank each item A/B/C/Z, report them as numbered tables, and record what was approved, done, or declined so later runs do not re-propose it. Use only when the user says just "kaizen" or "改善" on its own, as a command to run this review — not when either word appears inside an ordinary request ("kaizen this module", "apply kaizen to this code", "この関数を改善して").
 ---
 
 # Kaizen Skill
 
 ## Trigger
 
-Activate this skill when the user says:
+Activate this skill when the user says one of these on its own, as a command to run this review:
 
 - `kaizen`
 - `改善`
+
+Do not activate it when the word only appears inside an ordinary request to improve something ("kaizen this module",
+"apply kaizen to this code", "この関数を改善して"); handle those as normal requests.
 
 ## Purpose
 
@@ -136,15 +139,19 @@ When this skill is activated, perform the following steps:
 
    - Keep the report practical and concise.
 
-7. When the user approves items, carry them out, and record the outcome so a later session does not rediscover
-   or re-propose them:
+7. Record the items so a later session does not rediscover or re-propose them, in two moments:
 
-   - Record what was done and what was decided not to do (items ranked Z, and items the user declined), each with
-     a one-line reason.
+   - When you report: record every reported item right away, whether or not the user answers. Items ranked A/B/C
+     start as `open`; items ranked Z are recorded as `declined` with the one-line reason (with `sqlite-named-query`,
+     `kaizen_add` does this by itself from the item's `reason`).
 
-   - Where to record (the same place step 0 reads): with `sqlite-named-query`, add every reported item with `kaizen_add`
-     (owner = your role; decision `open` / `approved` / `done` / `declined` / `delegated`), and update it with
-     `kaizen_set` when it changes. Without it, update the single agent-memory entry named `kaizen`.
+   - When something is decided or finished: carry out the items the user approves, then update each item —
+     `done` with what was done, `declined` with a one-line reason (items the user turned down), or `delegated`.
+     An item ranked Z is never `done`.
+
+   - Where to record (the same place step 0 reads): with `sqlite-named-query`, `kaizen_add` when you report
+     (owner = your role) and `kaizen_set` when a decision or result changes. Without it, update the single
+     agent-memory entry named `kaizen`.
 
 ## Setting up the kaizen table
 
@@ -153,9 +160,13 @@ Templates are in `references/sqlite/` next to this file. In a project that uses 
 1. Copy `migration_kaizen.sql` into the project's `db/migrations/` with the next free number
    (e.g. `024_kaizen.sql`). Never edit an applied migration.
 
-2. Copy `kaizen_add.sql`, `kaizen_recall.sql` and `kaizen_set.sql` into `db/queries/`.
+2. Copy `migration_kaizen_guards.sql` into `db/migrations/` with the number after it. It makes the database
+   refuse a rank Z item marked `done` and a `declined` item without a reason. A project that already has the
+   kaizen table adds just this file, with its next free number; existing rows are not touched.
 
-3. Run `nq.py migrate` and `nq.py check`. Commit these files with the project's normal procedure.
+3. Copy `kaizen_add.sql`, `kaizen_recall.sql` and `kaizen_set.sql` into `db/queries/`.
+
+4. Run `nq.py migrate` and `nq.py check`. Commit these files with the project's normal procedure.
 
 ## Example
 
